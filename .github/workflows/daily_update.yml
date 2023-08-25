@@ -14,7 +14,7 @@ jobs:
 
       - name: Download latest sqlite from S3
         run: |
-          curl -s -o eduskunta_data.sqlite https://ekdb-dumps.s3.eu-north-1.amazonaws.com/v1/latest.eduskunta_data.sqlite
+          curl -o eduskunta_data.sqlite https://ekdb-dumps.s3.eu-north-1.amazonaws.com/v1/latest.eduskunta_data.sqlite
 
       - name: Download data from avoindata.eduskunta.fi
         run: |
