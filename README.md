@@ -48,6 +48,7 @@ The script replicates the tables as they are. Some notes about the result:
 
 - All columns are strings, except the primary key which is an integer
 - Some columns contain massive XML blobs (e.g. XmlData-column in VaskiData-table)
+- The script adds an additional metadata-table, which contains information like the data source and license
 
 ## Inspecting the data
 
