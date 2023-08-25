@@ -1,0 +1,30 @@
+name: Daily update
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # Daily at 5am UTC
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Download latest sqlite from S3
+        run: |
+          curl -s -o eduskunta_data.sqlite https://ekdb-dumps.s3.eu-north-1.amazonaws.com/v1/latest.eduskunta_data.sqlite
+
+      - name: Download data from avoindata.eduskunta.fi
+        run: |
+          python3 bin_download_data.py
+
+      - name: Upload to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          python -m pip install boto3
+          python bin_upload_to_s3.py
