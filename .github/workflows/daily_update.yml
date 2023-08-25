@@ -1,8 +1,7 @@
 name: Daily update
 
 on:
-  schedule:
-    - cron: "0 5 * * *" # Daily at 5am UTC
+  - workflow_dispatch
 
 jobs:
   upload:
