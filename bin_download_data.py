@@ -141,7 +141,7 @@ def run():
     """)
     db.commit()
   except sqlite3.OperationalError as err:
-    if "table source_and_license already exists" in str(err):
+    if "table metadata already exists" in str(err):
       # This is fine, continue
       ""
     else:
